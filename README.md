@@ -33,6 +33,7 @@ receivers:
 - name: 'web.hook'
   webhook_configs:
   - url: 'http://file-webhook.monitoring.svc.cluster.local:8080/'
-  ```
+  
+```
 
   
