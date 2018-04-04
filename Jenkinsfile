@@ -34,6 +34,9 @@ pipeline {
           done
         """
        */
+       sh """
+          mkdir -p /tmp/src/
+       """
         script {
           openshift.withCluster() {
             echo "Building  ${APP_NAME} from-dir=oc-build"
