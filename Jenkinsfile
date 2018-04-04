@@ -6,7 +6,7 @@ openshift.withCluster() {
 }
 
 pipeline {
-  agent { label 'maven' }
+  agent { label 'nodejs' }
   stages {
     stage('Code Checkout') {
       steps {
