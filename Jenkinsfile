@@ -16,11 +16,10 @@ pipeline {
     }
 
     stage('Code Build') {
-      /*steps {
-                                            sh "/usr/local/s2i/"
+      steps {
+       //   sh "/usr/local/s2i/"
         echo "toto"
-      }*/
-      echo "toto"
+      }
     }
 
     stage('Image Build') {
