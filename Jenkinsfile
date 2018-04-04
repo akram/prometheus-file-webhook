@@ -16,6 +16,8 @@ pipeline {
       }
     }
 
+    
+    
     stage('Code Build') {
       steps {
         // sh /usr/local/s2i/assemble
@@ -23,24 +25,21 @@ pipeline {
       }
     }
 
-    stage('Image Build') {
-     steps {
-        echo 'Building Image'
-     /*    sh """
-          set +x
-          rm -rf oc-build && mkdir -p oc-build/deployments
-          for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
-            cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
-          done
-        """
-       */
-       sh """
-          mkdir -p /tmp/src/
-       """
-        script {
-          openshift.withCluster() {
-            echo "Building  ${APP_NAME} from-dir=oc-build"
-            build = openshift.startBuild("${APP_NAME}")
+     stage('Image Build') {
+      steps {
+         echo 'Building Image'
+          sh """
+           set +x
+           rm -rf oc-build && mkdir -p oc-build/deployments
+           for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
+             cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
+           done
+         """
+        
+         script {
+           openshift.withCluster() {
+             echo "Building  ${APP_NAME} from-dir=oc-build"
+ 
 
             timeout(10) {
               build.untilEach {
