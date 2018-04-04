@@ -15,27 +15,28 @@ pipeline {
     }
 
     stage('Code Build') {
-      steps {
-        sh "mvn -q clean package"
+      /*steps {
+                                            sh "/usr/local/s2i/"
         echo "toto"
-      }
+      }*/
+      echo "toto"
     }
 
     stage('Image Build') {
      steps {
         echo 'Building Image'
-         sh """
+     /*    sh """
           set +x
           rm -rf oc-build && mkdir -p oc-build/deployments
           for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
             cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
           done
         """
-       
+       */
         script {
           openshift.withCluster() {
             echo "Building  ${APP_NAME} from-dir=oc-build"
-            build = openshift.startBuild("${APP_NAME}", "--from-dir=oc-build")
+            build = openshift.startBuild("${APP_NAME}")
 
             timeout(10) {
               build.untilEach {
