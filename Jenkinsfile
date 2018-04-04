@@ -18,10 +18,9 @@ pipeline {
 
     stage('Code Build') {
       steps {
-      //                                      sh "/usr/local/s2i/"
+        // sh /usr/local/s2i/assemble
         echo "Code Build"
       }
-      echo "Code Build OK"
     }
 
     stage('Image Build') {
