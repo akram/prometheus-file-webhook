@@ -3,7 +3,6 @@ def template = 'https://raw.githubusercontent.com/akram/image-scanning-signing-s
 openshift.withCluster() {
   env.NAMESPACE =  openshift.project()
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${NAMESPACE}-?/, '').replaceAll(/-?pipeline-?/, '').replace("/", "")
-  env.APP_NAME = "file-webhook"
 }
 
 pipeline {
